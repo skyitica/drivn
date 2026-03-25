@@ -1,5 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Theme toggle (persisted) ──
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+
+  function applyTheme(theme) {
+    const next = theme === 'light' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('drivn-theme', next);
+    } catch (e) {}
+    if (themeToggle) {
+      themeToggle.setAttribute(
+        'aria-label',
+        next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+      );
+      themeToggle.setAttribute(
+        'title',
+        next === 'dark' ? 'Light mode' : 'Dark mode'
+      );
+    }
+  }
+
+  function toggleTheme() {
+    const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  }
+
+  if (themeToggle) {
+    const saved = root.getAttribute('data-theme');
+    applyTheme(saved === 'light' ? 'light' : 'dark');
+    themeToggle.addEventListener('click', toggleTheme);
+  }
+
   // ── Scroll-based nav styling ──
   const nav = document.getElementById('nav');
   const handleNavScroll = () => {
