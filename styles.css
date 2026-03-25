@@ -39,6 +39,9 @@
   --service-featured-border: rgba(0, 212, 255, 0.2);
   --client-pill-hover-bg: rgba(0, 212, 255, 0.05);
   --theme-toggle-shadow: rgba(0, 212, 255, 0.25);
+  --btn-primary-overlay: linear-gradient(135deg, #00e8ff, #9b4dff);
+  --btn-primary-glow: rgba(0, 212, 255, 0.3);
+  --input-focus-ring: rgba(0, 212, 255, 0.1);
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
   --container: 1200px;
@@ -82,6 +85,68 @@ html[data-theme="light"] {
   --service-featured-border: rgba(0, 136, 179, 0.28);
   --client-pill-hover-bg: rgba(0, 136, 179, 0.08);
   --theme-toggle-shadow: rgba(0, 136, 179, 0.35);
+  --btn-primary-overlay: linear-gradient(135deg, #33c4e8, #9b6de8);
+  --btn-primary-glow: rgba(0, 136, 179, 0.35);
+  --input-focus-ring: rgba(0, 136, 179, 0.15);
+}
+
+/* Pastel — playful palette (#FFB3BA, #FF9AA2, #FFACAC, #E8B4F8, #C9B1FF, #B5B9FF, #BAE1FF, #B5DEFF, #C7EEFF, #B5EAD7, #C7F2C7, #DAFFB3, #FFDAC1, #FFF4A3, #FFE4B5, #F5E6CA, #E8D5C4, #D4E8E1) */
+html[data-theme="pastel"] {
+  color-scheme: light;
+  --bg: #f5e6ca;
+  --bg-elevated: #d4e8e1;
+  --bg-card: #fffaf3;
+  --bg-card-hover: #ffdac1;
+  --border: rgba(90, 70, 65, 0.12);
+  --border-hover: rgba(201, 177, 255, 0.55);
+  --text: #3d2c28;
+  --text-secondary: #5c4a45;
+  --text-muted: #8a7268;
+  --accent-1: #c9b1ff;
+  --accent-2: #e8b4f8;
+  --gradient: linear-gradient(
+    135deg,
+    #ffb3ba 0%,
+    #ff9aa2 12%,
+    #ffacac 18%,
+    #e8b4f8 32%,
+    #c9b1ff 44%,
+    #b5b9ff 52%,
+    #bae1ff 64%,
+    #c7eeff 72%,
+    #b5ead7 82%,
+    #c7f2c7 88%,
+    #daffb3 94%,
+    #fff4a3 100%
+  );
+  --hero-overlay-start: rgba(245, 230, 202, 0.38);
+  --hero-overlay-mid: rgba(255, 218, 193, 0.48);
+  --hero-overlay-end: rgba(245, 230, 202, 0.91);
+  --nav-scrolled-bg: rgba(245, 230, 202, 0.93);
+  --nav-scrolled-border: rgba(201, 177, 255, 0.4);
+  --hero-badge-bg: rgba(255, 255, 255, 0.6);
+  --pricing-card-bg: linear-gradient(
+    135deg,
+    rgba(255, 179, 186, 0.4),
+    rgba(232, 180, 248, 0.35),
+    rgba(186, 225, 255, 0.4),
+    rgba(181, 234, 215, 0.32)
+  );
+  --pricing-card-border: rgba(181, 185, 255, 0.55);
+  --service-featured-bg: linear-gradient(
+    135deg,
+    rgba(255, 244, 163, 0.5),
+    rgba(255, 218, 193, 0.45),
+    rgba(199, 238, 255, 0.4)
+  );
+  --service-featured-border: rgba(255, 154, 162, 0.55);
+  --client-pill-hover-bg: rgba(255, 179, 186, 0.35);
+  --theme-toggle-shadow: rgba(201, 177, 255, 0.5);
+  --btn-primary-overlay: linear-gradient(135deg, #ffdac1, #ffe4b5, #fff4a3, #e8b4f8, #bae1ff);
+  --btn-primary-glow: rgba(232, 180, 248, 0.55);
+  --input-focus-ring: rgba(201, 177, 255, 0.35);
+  --radius: 16px;
+  --radius-lg: 28px;
 }
 
 body {
@@ -90,6 +155,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 a {
@@ -151,7 +217,7 @@ img, video {
   position: absolute;
   inset: 0;
   border-radius: 50px;
-  background: linear-gradient(135deg, #00e8ff, #9b4dff);
+  background: var(--btn-primary-overlay);
   opacity: 0;
   transition: opacity 0.3s;
   z-index: -1;
@@ -163,7 +229,7 @@ img, video {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 8px 30px var(--btn-primary-glow);
 }
 
 .btn-ghost {
@@ -300,8 +366,16 @@ html[data-theme="dark"] .theme-toggle .theme-icon-sun {
   display: block;
 }
 
-html[data-theme="light"] .theme-toggle .theme-icon-moon {
+html[data-theme="light"] .theme-toggle .theme-icon-palette {
   display: block;
+}
+
+html[data-theme="pastel"] .theme-toggle .theme-icon-moon {
+  display: block;
+}
+
+html[data-theme="pastel"] .theme-toggle {
+  border-radius: 14px;
 }
 
 .mobile-toggle {
@@ -870,7 +944,7 @@ html[data-theme="light"] .theme-toggle .theme-icon-moon {
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--accent-1);
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
 }
 
 .form-group select {

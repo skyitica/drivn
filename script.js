@@ -1,35 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Theme toggle (persisted) ──
+  // ── Theme cycle: dark → light → pastel (persisted) ──
+  const THEMES = ['dark', 'light', 'pastel'];
   const root = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
 
+  const THEME_UI = {
+    dark: {
+      aria: 'Switch to light mode',
+      title: 'Theme: Dark — next: Light',
+    },
+    light: {
+      aria: 'Switch to pastel mode',
+      title: 'Theme: Light — next: Pastel',
+    },
+    pastel: {
+      aria: 'Switch to dark mode',
+      title: 'Theme: Pastel — next: Dark',
+    },
+  };
+
+  function normalizeTheme(raw) {
+    const t = raw === 'light' || raw === 'pastel' ? raw : 'dark';
+    return t;
+  }
+
   function applyTheme(theme) {
-    const next = theme === 'light' ? 'light' : 'dark';
+    const next = normalizeTheme(theme);
     root.setAttribute('data-theme', next);
     try {
       localStorage.setItem('drivn-theme', next);
     } catch (e) {}
     if (themeToggle) {
-      themeToggle.setAttribute(
-        'aria-label',
-        next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-      );
-      themeToggle.setAttribute(
-        'title',
-        next === 'dark' ? 'Light mode' : 'Dark mode'
-      );
+      const ui = THEME_UI[next];
+      themeToggle.setAttribute('aria-label', ui.aria);
+      themeToggle.setAttribute('title', ui.title);
     }
   }
 
   function toggleTheme() {
-    const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    applyTheme(current === 'dark' ? 'light' : 'dark');
+    const current = normalizeTheme(root.getAttribute('data-theme'));
+    const i = THEMES.indexOf(current);
+    const next = THEMES[(i + 1) % THEMES.length];
+    applyTheme(next);
   }
 
   if (themeToggle) {
-    const saved = root.getAttribute('data-theme');
-    applyTheme(saved === 'light' ? 'light' : 'dark');
+    applyTheme(normalizeTheme(root.getAttribute('data-theme')));
     themeToggle.addEventListener('click', toggleTheme);
   }
 
