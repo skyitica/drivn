@@ -25,6 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return t;
   }
 
+  const heroVideoDark = document.querySelector('.hero-video--dark');
+  const heroVideoLight = document.querySelector('.hero-video--light');
+
+  function syncHeroVideos() {
+    const t = normalizeTheme(root.getAttribute('data-theme'));
+    if (heroVideoDark) {
+      heroVideoDark.pause();
+    }
+    if (heroVideoLight) {
+      heroVideoLight.pause();
+    }
+    if (t === 'dark' && heroVideoDark) {
+      heroVideoDark.play().catch(() => {});
+    } else if (t === 'light' && heroVideoLight) {
+      heroVideoLight.play().catch(() => {});
+    }
+  }
+
   function applyTheme(theme) {
     const next = normalizeTheme(theme);
     root.setAttribute('data-theme', next);
@@ -36,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       themeToggle.setAttribute('aria-label', ui.aria);
       themeToggle.setAttribute('title', ui.title);
     }
+    syncHeroVideos();
   }
 
   function toggleTheme() {
@@ -45,8 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(next);
   }
 
+  applyTheme(normalizeTheme(root.getAttribute('data-theme')));
+
   if (themeToggle) {
-    applyTheme(normalizeTheme(root.getAttribute('data-theme')));
     themeToggle.addEventListener('click', toggleTheme);
   }
 

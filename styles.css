@@ -90,63 +90,44 @@ html[data-theme="light"] {
   --input-focus-ring: rgba(0, 136, 179, 0.15);
 }
 
-/* Pastel — playful palette (#FFB3BA, #FF9AA2, #FFACAC, #E8B4F8, #C9B1FF, #B5B9FF, #BAE1FF, #B5DEFF, #C7EEFF, #B5EAD7, #C7F2C7, #DAFFB3, #FFDAC1, #FFF4A3, #FFE4B5, #F5E6CA, #E8D5C4, #D4E8E1) */
+/* Pastel — surfaces only: #c4dade #dde8ed #f9f0e7 #e7d9cc #ecf2f5 #b9d9d5 */
 html[data-theme="pastel"] {
   color-scheme: light;
-  --bg: #f5e6ca;
-  --bg-elevated: #d4e8e1;
-  --bg-card: #fffaf3;
-  --bg-card-hover: #ffdac1;
-  --border: rgba(90, 70, 65, 0.12);
-  --border-hover: rgba(201, 177, 255, 0.55);
-  --text: #3d2c28;
-  --text-secondary: #5c4a45;
-  --text-muted: #8a7268;
-  --accent-1: #c9b1ff;
-  --accent-2: #e8b4f8;
-  --gradient: linear-gradient(
-    135deg,
-    #ffb3ba 0%,
-    #ff9aa2 12%,
-    #ffacac 18%,
-    #e8b4f8 32%,
-    #c9b1ff 44%,
-    #b5b9ff 52%,
-    #bae1ff 64%,
-    #c7eeff 72%,
-    #b5ead7 82%,
-    #c7f2c7 88%,
-    #daffb3 94%,
-    #fff4a3 100%
-  );
-  --hero-overlay-start: rgba(245, 230, 202, 0.38);
-  --hero-overlay-mid: rgba(255, 218, 193, 0.48);
-  --hero-overlay-end: rgba(245, 230, 202, 0.91);
-  --nav-scrolled-bg: rgba(245, 230, 202, 0.93);
-  --nav-scrolled-border: rgba(201, 177, 255, 0.4);
-  --hero-badge-bg: rgba(255, 255, 255, 0.6);
-  --pricing-card-bg: linear-gradient(
-    135deg,
-    rgba(255, 179, 186, 0.4),
-    rgba(232, 180, 248, 0.35),
-    rgba(186, 225, 255, 0.4),
-    rgba(181, 234, 215, 0.32)
-  );
-  --pricing-card-border: rgba(181, 185, 255, 0.55);
-  --service-featured-bg: linear-gradient(
-    135deg,
-    rgba(255, 244, 163, 0.5),
-    rgba(255, 218, 193, 0.45),
-    rgba(199, 238, 255, 0.4)
-  );
-  --service-featured-border: rgba(255, 154, 162, 0.55);
-  --client-pill-hover-bg: rgba(255, 179, 186, 0.35);
-  --theme-toggle-shadow: rgba(201, 177, 255, 0.5);
-  --btn-primary-overlay: linear-gradient(135deg, #ffdac1, #ffe4b5, #fff4a3, #e8b4f8, #bae1ff);
-  --btn-primary-glow: rgba(232, 180, 248, 0.55);
-  --input-focus-ring: rgba(201, 177, 255, 0.35);
+  --bg: #f9f0e7;
+  --bg-elevated: #ecf2f5;
+  --bg-card: #dde8ed;
+  --bg-card-hover: #c4dade;
+  --border: rgba(196, 218, 222, 0.55);
+  --border-hover: rgba(185, 217, 213, 0.85);
+  --text: rgb(from #c4dade calc(r * 0.11) calc(g * 0.13) calc(b * 0.14));
+  --text-secondary: rgb(from #c4dade calc(r * 0.2) calc(g * 0.24) calc(b * 0.26));
+  --text-muted: rgb(from #c4dade calc(r * 0.32) calc(g * 0.36) calc(b * 0.38));
+  --accent-1: #b9d9d5;
+  --accent-2: #c4dade;
+  --gradient: linear-gradient(135deg, #b9d9d5 0%, #c4dade 35%, #dde8ed 70%, #ecf2f5 100%);
+  --hero-overlay-start: rgba(249, 240, 231, 0.45);
+  --hero-overlay-mid: rgba(236, 242, 245, 0.58);
+  --hero-overlay-end: rgba(249, 240, 231, 0.92);
+  --nav-scrolled-bg: rgba(249, 240, 231, 0.94);
+  --nav-scrolled-border: rgba(196, 218, 222, 0.65);
+  --hero-badge-bg: rgba(236, 242, 245, 0.75);
+  --pricing-card-bg: linear-gradient(135deg, #e7d9cc 0%, #ecf2f5 40%, #dde8ed 100%);
+  --pricing-card-border: rgba(185, 217, 213, 0.75);
+  --service-featured-bg: linear-gradient(135deg, #b9d9d5 0%, #c4dade 45%, #ecf2f5 100%);
+  --service-featured-border: rgba(196, 218, 222, 0.9);
+  --client-pill-hover-bg: rgba(196, 218, 222, 0.45);
+  --theme-toggle-shadow: rgba(185, 217, 213, 0.65);
+  --btn-primary-overlay: linear-gradient(135deg, #b9d9d5, #c4dade, #dde8ed);
+  --btn-primary-glow: rgba(196, 218, 222, 0.65);
+  --input-focus-ring: rgba(185, 217, 213, 0.45);
   --radius: 16px;
   --radius-lg: 28px;
+}
+
+html[data-theme="pastel"] .btn-primary,
+html[data-theme="pastel"] .nav-cta,
+html[data-theme="pastel"] .service-badge {
+  color: var(--text) !important;
 }
 
 body {
@@ -413,12 +394,32 @@ html[data-theme="pastel"] .theme-toggle {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background-color: var(--bg);
 }
 
 .hero-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero-video--light {
+  display: none;
+}
+
+html[data-theme="light"] .hero-video--dark {
+  display: none;
+}
+
+html[data-theme="light"] .hero-video--light {
+  display: block;
+}
+
+html[data-theme="pastel"] .hero-video--dark,
+html[data-theme="pastel"] .hero-video--light {
+  display: none;
 }
 
 .hero-overlay {
